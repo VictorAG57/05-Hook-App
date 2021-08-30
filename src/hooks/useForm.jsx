@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 
 // Ese custom Hook nos permite referenciar el valor de algun input,
 // en este caso esta echos espesificamente para ser usado referenciando al
@@ -7,9 +7,17 @@ import React, { useState } from 'react'
 
 const useForm = ( initialState = {}) => {
 
-    const [values, setValues] = useState(initialState)
+    const [ values, setValues ] = useState( initialState );
+
+    // Función que nos permite resetear el formulario cambiando el formulario
+    // al estado inicial.
+    const reset = () => {
+        setValues( initialState );
+    }
 
     // handleInputChange --> manejar el cambio de entrada
+    // Está función maneja el evento, hacemos referencia al avento
+    // y mediante ella cambiamos el estado (setValues)
     const handleInputChange = ({ target }) => {
         // Con setValues cambiamos el estado inicial, por lo escrito
         // por el usuario en cada caja de texto
@@ -23,8 +31,9 @@ const useForm = ( initialState = {}) => {
     // custom Hook en alguna otra aplicasión
     return [
         values, 
-        handleInputChange
+        handleInputChange,
+        reset
     ];
 };
 
-export default useForm
+export default useForm;
