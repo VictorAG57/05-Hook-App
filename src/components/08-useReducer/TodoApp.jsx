@@ -1,8 +1,9 @@
 import React, { useReducer, useEffect } from 'react';
 import { todoReducer } from './todoReducer';
-import useForm from '../../hooks/useForm';
 
 import './styles.css';
+import TodoList from './TodoList';
+import TodoAdd from './TodoAdd';
 
 // initialState antiguo -->
 // const initialState = [{
@@ -39,10 +40,6 @@ const init = () => {
 const TodoApp = () => {
 
     const [ state, dispatch ] = useReducer( todoReducer, [], init );
-
-    const [ { description }, handleInputChange, reset ] = useForm({
-        description: ''
-    });
 
     // Creamos un efecto secundario
     useEffect(() => {
@@ -84,34 +81,15 @@ const TodoApp = () => {
         });
     };
 
-    // En el momento que se envíe el formulario -->
-    const handleSubmit = ( e ) => {
-        // Evitamos que se refresque la página
-        e.preventDefault()
-
-        if (description.trim().length <= 1){
-            return ;
-        }
-
-        // Creamos la nueva tarea a agregar al estado
-        const newTodo = {
-            id: new Date().getTime(),
-            desc: description,
-            done: false
-        };
-
-        // Esa nueva tarea es agregada a una acción ( las acciones ayudan
-        // a crear un nuevo estado o agregar la nueva tarea )
-        const newAction = {
+    // Está función la usaremos en mi componente TodoAdd,
+    // y funcionara como un dispatch pero en una función
+    // es mucho más util para cuando queremos hacer la función add
+    // y solo agregamos la data, la nueva tarea.
+    const handleAddTodo = ( newTodo ) => {
+        dispatch({
             type: 'add',
             payload : newTodo
-        };
-        
-        // Y enviamos esa acción mediante el dispatch
-        dispatch( newAction );
-
-        // Me permite resetear el formulario depues de agregar una tarea.
-        reset()
+        });
     };
 
     return (
@@ -121,53 +99,20 @@ const TodoApp = () => {
 
             <div className="row">
                 <div className="col-7">
-                    <ul className="list-group list-group-flush">
-                        {
-                            state.map( ( todo, i ) => (
-                                <li
-                                    key={ todo.id }
-                                    className="list-group-item"
-                                > 
-                                    <p 
-                                        className={`${ todo.done && 'complete'}`}
-                                        onClick={ ()=> handleToggle( todo.id )}
-                                    >
-                                        { i + 1}. { todo.desc }
-                                    </p> 
-                                    <button 
-                                        className="btn btn-danger"
-                                        onClick= { () => handleDelete(todo.id) }
-                                    >
-                                        Borrar
-                                    </button>
-                                </li>
-                                
-                            ))
-                        }
-                    </ul>
+                    <TodoList 
+                        state={ state } 
+                        handleDelete={ handleDelete } 
+                        handleToggle={ handleToggle }>
+                    </TodoList>
                 </div>
 
                 <div className="col-5">
-                    <h3>Agregar TODO</h3>
-                    <hr></hr>
-                    <form onSubmit={ handleSubmit }>
-                        <input
-                            type="text"
-                            name="description"
-                            placeholder="descripción..."
-                            className="form-control"
-                            value={ description }
-                            onChange={ handleInputChange }
-                        >
-                        </input>
+                    <TodoAdd
 
-                        <button 
-                            className="btn btn-primary mt-1 form-control"
-                            type="submit"
-                        >
-                            Agregar
-                        </button>
-                    </form>
+                        handleAddTodo={ handleAddTodo }    
+                    >
+
+                    </TodoAdd>
                 </div>
             </div>
         </div>

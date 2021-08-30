@@ -21,15 +21,15 @@ export const todoReducer = ( state = [], action ) => {
     
         case 'toggleAlternativaDeCodigoLargo':
             return state.map( todo => {
-                if ( todo.id === action.payload) {
+                if ( todo.id === action.payload ) {
                     return {
                         ...todo,
                         done: !todo.done
-                    }
-                }else{
+                    };
+                } else{
                     return todo;
-                }
-            })
+                };
+            });
         case 'toggle':
             return state.map( todo =>
                 ( todo.id === action.payload )
@@ -38,7 +38,7 @@ export const todoReducer = ( state = [], action ) => {
                     // propiedad done (true/false) false
                     ? { ...todo, done: !todo.done }
                     // de lo contrario retornamos el mismo estado
-                    : { todo }
+                    : todo 
             )
         default:
             return state;
