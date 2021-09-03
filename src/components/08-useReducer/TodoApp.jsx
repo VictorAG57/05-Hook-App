@@ -67,7 +67,7 @@ const TodoApp = () => {
             type: 'delete',
             // Creamos la nueva tarea en este caso borrar el toDo con id
             payload : todoId
-        };
+        }; 
 
         // Enviamos a la función reducer la acción.
         dispatch( newActionDelate );

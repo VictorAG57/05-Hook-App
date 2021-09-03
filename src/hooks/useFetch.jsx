@@ -41,6 +41,14 @@ const useFetch = ( url ) => {
                         data
                     });
                 };
+            })
+            // Realizamos un .catch en caso de un error
+            .catch( ()=> {
+                setstate({
+                    data: null,
+                    loading: false,
+                    error: 'No se pudo cargar la iformación'
+                });
             });
     },[url]); // Este efecto que llamara cada que la url cambie.
 

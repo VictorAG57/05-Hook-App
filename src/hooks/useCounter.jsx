@@ -19,7 +19,7 @@ const useCounter = ( initialState = 1 ) => {
     return {
         counter,
         increment,
-        decrement,
+        decrement, 
         reset
     };
 };

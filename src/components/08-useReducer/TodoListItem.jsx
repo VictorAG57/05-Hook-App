@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-const TodoListItem = ({ todo, i, handleDelete, handleToggle}) => {
+const TodoListItem = ({ todo, i, handleDelete, handleToggle }) => {
     return (
         <Fragment>
             <li

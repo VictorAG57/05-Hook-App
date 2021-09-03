@@ -25,6 +25,6 @@ const RealExampleRef = () => {
             
         </Fragment>
     )
-}
+};
 
-export default RealExampleRef
+export default RealExampleRef;

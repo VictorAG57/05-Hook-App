@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en <RealExampleRef /> Debe de mostrar el componente 1`] = `
+<Fragment>
+  <h1>
+    Real custom hook
+  </h1>
+  <hr />
+  <button
+    className="btn btn-primary"
+    onClick={[Function]}
+  >
+    Show
+  </button>
+</Fragment>
+`;
